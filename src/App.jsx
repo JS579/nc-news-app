@@ -4,16 +4,20 @@ import Header from './Components/Header'
 import NavBar from './Components/NavBar'
 import Articles from './Components/Articles'
 import {Route, Routes} from  "react-router"
+import HomePage from './Components/HomePage'
+import SingleArticle from './Components/SingleArticle'
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
       <Header></Header>
       <NavBar></NavBar>
       <Routes>
-      <Route path="/" element={<Articles />} />
+      <Route path="/" element={<HomePage />} />
+      <Route path="/articles" element={<Articles />} />
+      <Route path="/articles/:article_id" element={<SingleArticle />} />
       </Routes>
     </>
   )
