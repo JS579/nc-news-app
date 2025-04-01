@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { getArticles, getArticlesByTopic } from "../API"
+import { getArticles } from "../API"
 import ArticleCard from "./ArticleCard";
 import { useSearchParams } from "react-router";
 
@@ -12,16 +12,10 @@ const [isLoading, setIsLoading] = useState(true);
 const topic = searchParams.get("topic")
 
 useEffect(() => {   
-    if(!topic){
-    getArticles().then((articles) => {
+    getArticles(topic).then((articles) => {
     setArticles(articles);
         setIsLoading(false);
   })
-} else {
-    getArticlesByTopic(topic).then((articles) => {
-        setArticles(articles);
-        setIsLoading(false);
-    })}
 }, [topic]);
 
 if (isLoading) {
@@ -34,7 +28,7 @@ if (isLoading) {
         <ul className="articles-list">
           {articles.map((article) => {
             return (
-                <ArticleCard article ={article} key={article.article_id}/>
+                <ArticleCard article={article} key={article.article_id}/>
             );
           })}
         </ul>

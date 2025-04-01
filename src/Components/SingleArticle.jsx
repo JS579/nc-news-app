@@ -1,21 +1,36 @@
-import {useParams} from "react-router"
+import {useParams, Link} from "react-router"
 import {useState, useEffect} from "react"
-import { getArticleById } from "../API";
-
+import { getArticleById, getCommentsbyArticleId } from "../API";
+import Comment from "./Comment";
 
 
 function SingleArticle(){
 
 const [isLoading, setIsLoading] = useState(true);
+const [commentsLoading, setCommentsLoading] = useState(true)
+const [commentLink, setCommentLink] = useState(true)
+const [viewComments, setViewComments] = useState(false)
 const [article, setArticle] = useState()
-const currentArticle = useParams()
+const [comments, setComments] = useState([])
+const {article_id} = useParams()
+
 
 useEffect(() => {
-    getArticleById(currentArticle.article_id).then((article) => {
+    getArticleById(article_id).then((article) => {
       setArticle(article);
       setIsLoading(false)
+    }).then(()=>{
+        getCommentsbyArticleId(article_id).then((comments) => {
+            setComments(comments)
+            setCommentsLoading(false)
+        })
     });
-  }, [currentArticle]);
+  }, [article_id]);
+
+  function showCommentsClick(){
+    setViewComments(!viewComments)
+    setCommentLink(!commentLink)
+  }
 
 if(isLoading){
     return (
@@ -30,7 +45,15 @@ if(isLoading){
         <p className="article-body">{article.body}</p>
 <br />
             <p><b>Votes: </b>{article.votes}</p>
-            <span>{article.comment_count} comments</span> 
+            {commentLink ? <p onClick={showCommentsClick}><Link to="">{article.comment_count} comments</Link></p> : <p onClick={showCommentsClick}><Link to="">Hide comments</Link></p>}
+        <br />
+
+      {!viewComments ? <p></p> :  <ul className="comment-list">
+       {commentsLoading ? <p>Loading...</p> : <span>{comments.map((comment)=> {
+        return <Comment comment={comment} key={comment.comment_id}/>
+       })}</span>}
+        </ul>}
+
         </>
     )
 }
