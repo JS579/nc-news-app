@@ -17,6 +17,7 @@ function getTopics(){
 }
 
 function getArticlesByTopic(searchParams) {
+    console.log(searchParams)
     return api.get(`/articles?topic=${searchParams}`).then(({data})=>{
         return data.articles
     })
