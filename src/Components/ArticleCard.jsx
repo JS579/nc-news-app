@@ -1,10 +1,11 @@
 import Card from 'react-bootstrap/Card';
+import {Link} from "react-router"
 
 function ArticleCard({article}) {
 
     return(
-        <>
-        <Card className="card" style={{ width: '19rem' }} key={article.article_id}>
+        <> 
+       <Link to={`/articles/${article.article_id}`}><Card className="card" style={{ width: '19rem' }} key={article.article_id}>
         <Card.Img variant="top" className="item-img" src={article.article_img_url} />
         <Card.Body>
           <Card.Title>{article.title}</Card.Title>
@@ -15,7 +16,7 @@ function ArticleCard({article}) {
             <span>Comments: {article.comment_count}</span> 
           </Card.Text>
         </Card.Body>
-      </Card>
+      </Card></Link>
 
 
       </>

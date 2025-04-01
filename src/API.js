@@ -10,5 +10,23 @@ function getArticles(){
     })
 }
 
+function getTopics(){
+    return api.get("/topics").then(({data})=>{
+        return data.topics
+    })
+}
 
-export { getArticles }
+function getArticlesByTopic(searchParams) {
+    return api.get(`/articles?topic=${searchParams}`).then(({data})=>{
+        return data.articles
+    })
+}
+
+function getArticleById(id) {
+    return api.get(`/articles/${id}`).then(({data})=>{
+        return data.article
+    })
+}
+
+
+export { getArticles, getTopics, getArticlesByTopic, getArticleById }
