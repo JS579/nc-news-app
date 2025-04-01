@@ -26,7 +26,7 @@ function HomePage() {
 
             <section>
                 <h2 className="welcome-msg">Welcome to NC News</h2>
-            </section >
+            </section ><br />
             <ul
                 className="topic-list">
                 <li key="view-all" className="topic"><Link to="/articles">All Articles</Link></li>

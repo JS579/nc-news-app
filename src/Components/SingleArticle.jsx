@@ -26,7 +26,11 @@ if(isLoading){
     return (<>
         <h2>{article.title}</h2><br />
         <img src={article.article_img_url}/> <br /> <br/><br/>
-        <p>{article.body}</p>
+        <p><b>Author: </b>{article.author}<br/><b>Posted: </b>{(new Date(article.created_at)).toDateString()}</p><br />
+        <p className="article-body">{article.body}</p>
+<br />
+            <p><b>Votes: </b>{article.votes}</p>
+            <span>{article.comment_count} comments</span> 
         </>
     )
 }

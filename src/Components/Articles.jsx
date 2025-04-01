@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { getArticles, getArticlesByTopic } from "../API"
 import ArticleCard from "./ArticleCard";
-import { useSearchParams, Link } from "react-router";
+import { useSearchParams } from "react-router";
 
 function Articles(){
 const [articles, setArticles] = useState([]);
