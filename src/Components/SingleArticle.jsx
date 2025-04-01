@@ -1,7 +1,8 @@
 import {useParams, Link} from "react-router"
 import {useState, useEffect} from "react"
-import { getArticleById, getCommentsbyArticleId } from "../API";
+import { getArticleById, getCommentsbyArticleId, modifyArticleById } from "../API";
 import Comment from "./Comment";
+
 
 
 function SingleArticle(){
@@ -12,8 +13,31 @@ const [commentLink, setCommentLink] = useState(true)
 const [viewComments, setViewComments] = useState(false)
 const [article, setArticle] = useState()
 const [comments, setComments] = useState([])
+const [optimisticVotes, setOptimisticVotes] = useState(0)
+const [voteError, setVoteError] = useState(false)
 const {article_id} = useParams()
 
+function increaseVotes(){
+    modifyArticleById(article_id, 1).catch(()=>{
+        setVoteError(true)
+        setOptimisticVotes((currentOptimisticVotes) =>{
+            return currentOptimisticVotes -1
+        })
+    })
+    setVoteError(false)
+    setOptimisticVotes(optimisticVotes +1)
+}
+
+function decreaseVotes(){
+    modifyArticleById(article_id, -1).catch(()=>{
+        setVoteError(true)
+        setOptimisticVotes((currentOptimisticVotes) =>{
+            return currentOptimisticVotes +1
+        })
+    })
+    setVoteError(false)
+    setOptimisticVotes(optimisticVotes -1)
+}
 
 useEffect(() => {
     getArticleById(article_id).then((article) => {
@@ -44,7 +68,12 @@ if(isLoading){
         <p><b>Author: </b>{article.author}<br/><b>Posted: </b>{(new Date(article.created_at)).toDateString()}</p><br />
         <p className="article-body">{article.body}</p>
 <br />
-            <p><b>Votes: </b>{article.votes}</p>
+            <span><b>Votes: </b>{article.votes + optimisticVotes}</span><br/>
+            <button className="vote-button" onClick={(increaseVotes)}>Up Vote</button>&nbsp;&nbsp;&nbsp;
+            <button className="vote-button" onClick={(decreaseVotes)}>Down Vote</button><br />
+            {!voteError ? <p></p> : <p className="error-msg">Something wen't wrong, please try again!</p>}
+            <br /><br/>
+
             {commentLink ? <p onClick={showCommentsClick}><Link to="">{article.comment_count} comments</Link></p> : <p onClick={showCommentsClick}><Link to="">Hide comments</Link></p>}
         <br />
 
