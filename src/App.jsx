@@ -6,6 +6,7 @@ import Articles from './Components/Articles'
 import {Route, Routes} from  "react-router"
 import HomePage from './Components/HomePage'
 import SingleArticle from './Components/SingleArticle'
+import Comments from './Components/Comment'
 
 
 function App() {
