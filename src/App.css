@@ -56,7 +56,7 @@
   background-color: rgb(238, 238, 238);
 }
 
-.vote-button {
+.button {
   padding: 0.5em;
   background-color: blueviolet;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.912);
@@ -67,4 +67,25 @@
   margin: 1em;
   color: red;
   font-size: 0.9em;
+}
+
+.success-msg {
+  margin: 1em;
+  color: blueviolet;
+  font-size: 1em;
+}
+
+.comment-input {
+  width: 60%;
+  height: 6em;
+  background-color: rgb(186, 186, 186);
+  color: rgb(48, 48, 48);
+}
+
+.bad-input {
+  width: 60%;
+  height: 6em;
+  background-color: rgb(186, 186, 186);
+  color: rgb(48, 48, 48);
+  border: solid red;
 }
