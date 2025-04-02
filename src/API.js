@@ -10,7 +10,6 @@ function getArticles(searchParams) {
             return data.articles
         })
     } else {
-        console.log(searchParams)
         return api.get(`/articles?topic=${searchParams}`).then(({ data }) => {
             return data.articles
         })
@@ -39,5 +38,12 @@ function modifyArticleById(id, num){
     return api.patch(`/articles/${id}`, {inc_votes: num})
 }
 
+function addComment(commentObj, id){
+    return api.post(`/articles/${id}/comments`, commentObj).then((response)=>{
+        console.log(response)
+    }).catch((error)=>{
+        console.log(error);
+    })
+}
 
-export { getArticles, getTopics, getArticleById, getCommentsbyArticleId, modifyArticleById }
+export { getArticles, getTopics, getArticleById, getCommentsbyArticleId, modifyArticleById, addComment }
