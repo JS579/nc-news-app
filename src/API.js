@@ -4,16 +4,24 @@ const api = axios.create({
     baseURL: "https://nc-news-1qem.onrender.com/api"
 })
 
-function getArticles(searchParams) {
-    if (!searchParams) {
-        return api.get("/articles").then(({ data }) => {
-            return data.articles
-        })
-    } else {
-        return api.get(`/articles?topic=${searchParams}`).then(({ data }) => {
-            return data.articles
-        })
+function getArticles(topic, sortBy, order) {
+
+    let url = "/articles?"
+
+    if(topic){
+        url += `topic=${topic}&`
     }
+    if(sortBy){
+        url += `sort_by=${sortBy}&`
+    }
+    if(order){
+        url += `order=${order}`
+    }
+    
+        return api.get(url).then(({ data }) => {
+            return data.articles
+        })
+
 }
 
 function getTopics() {

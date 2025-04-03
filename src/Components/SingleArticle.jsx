@@ -65,11 +65,12 @@ function SingleArticle() {
         getArticleById(article_id).then((article) => {
             setArticle(article);
             setIsLoading(false)
-
+            setOptimisticVotes(0)
         }).then(() => {
             getCommentsbyArticleId(article_id).then((comments) => {
                 setComments(comments)
                 setCommentsLoading(false)
+                setOptimisticVotes(0)
             })
         })
     }, [article_id, commentsUpdated]);

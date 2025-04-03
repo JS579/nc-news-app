@@ -6,8 +6,8 @@ function ArticleCard({article}) {
     return(
         <> 
        <Link to={`/articles/${article.article_id}`}><Card className="card" style={{ width: '19rem' }} key={article.article_id}>
-        <Card.Img variant="top" className="item-img" src={article.article_img_url} />
-        <Card.Body>
+        <Card.Img variant="top" src={article.article_img_url} />
+        <Card.Body className="card-body">
           <Card.Title>{article.title}</Card.Title>
           <Card.Text><br/>
             <span>Author: {article.author}</span><br /><br />
