@@ -46,4 +46,9 @@ function addComment(commentObj, id){
     })
 }
 
-export { getArticles, getTopics, getArticleById, getCommentsbyArticleId, modifyArticleById, addComment }
+function deleteComment(comment_id){
+    console.log(comment_id)
+    return api.delete(`/comments/${comment_id}`)
+}
+
+export { getArticles, getTopics, getArticleById, getCommentsbyArticleId, modifyArticleById, addComment, deleteComment }

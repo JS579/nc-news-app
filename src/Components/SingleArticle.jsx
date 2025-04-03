@@ -16,7 +16,7 @@ function SingleArticle() {
     const [optimisticVotes, setOptimisticVotes] = useState(0)
     const [voteError, setVoteError] = useState(false)
     const [viewCommentForm, setViewCommentForm] = useState(false)
-    const [optimisticComments, setOptimisticComments] = useState(0)
+    const [commentsUpdated, setCommentsUpdated] = useState(false)
     const [commentInput, setCommentInput] = useState("")
     const { article_id } = useParams()
 
@@ -45,42 +45,48 @@ function SingleArticle() {
     }
 
     function showComments() {
-        if(!viewComments){
+        if (!viewComments) {
             setViewComments(true)
             setCommentLink(false)
         } else {
-        setViewComments(false)
-        setCommentLink(true)
-        setViewCommentForm(false)
+            setViewComments(false)
+            setCommentLink(true)
+            setViewCommentForm(false)
         }
     }
 
     function showCommentForm() {
         setViewCommentForm(true)
+        setCommentInput("")
     }
+
 
     useEffect(() => {
         getArticleById(article_id).then((article) => {
             setArticle(article);
             setIsLoading(false)
+
         }).then(() => {
             getCommentsbyArticleId(article_id).then((comments) => {
                 setComments(comments)
                 setCommentsLoading(false)
             })
-        });
-    }, [article_id, comments]);
+        })
+    }, [article_id, commentsUpdated]);
+
 
 
     if (isLoading) {
         return (
-            <p>Loading...</p>
+            <div className="spinner-border" role="status">
+                <span className="sr-only"></span>
+            </div>
         )
     }
 
     return (<>
         <h2>{article.title}</h2><br />
-        <img src={article.article_img_url} /> <br /> <br /><br />
+        <img src={article.article_img_url} className="article-image" /> <br /> <br /><br />
         <p><b>Author: </b>{article.author}<br /><b>Posted: </b>{(new Date(article.created_at)).toDateString()}</p><br />
         <p className="article-body">{article.body}</p>
         <br />
@@ -90,18 +96,19 @@ function SingleArticle() {
         {!voteError ? <p></p> : <p className="error-msg">Something wen't wrong, please try again!</p>}
         <br /><br />
 
-        {commentLink ? <p><Link to="" onClick={showComments}>{article.comment_count + optimisticComments} comments</Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {commentLink ? <p><Link to="" onClick={showComments}>{article.comment_count} comments</Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <Link to="" onClick={showCommentForm}>Add comment</Link></p> : <p>
             <Link to="" onClick={showComments}>Hide comments</Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <Link to="" onClick={showCommentForm}>Add comment</Link></p>}
         <br />
 
-        {!viewCommentForm ? <p></p> : <NewCommentForm article_id={article_id} optimisticComments={optimisticComments} setOptimisticComments={setOptimisticComments} commentInput={commentInput} setCommentInput={setCommentInput}/>}
+        {!viewCommentForm ? <p></p> : <NewCommentForm article_id={article_id} commentInput={commentInput} setCommentInput={setCommentInput} currentUsername={currentUsername} commentsUpdated={commentsUpdated} setCommentsUpdated={setCommentsUpdated} />}
 
         {!viewComments ? <p></p> : <ul className="comment-list">
-            {commentsLoading ? <p>Loading...</p> : <span>{comments.map((comment) => {
-                return <Comment comment={comment} key={comment.comment_id} />
-            })}</span>}
+            {commentsLoading ? <div className="spinner-border" role="status">
+                <span className="sr-only"></span></div> : <span>{comments.map((comment) => {
+                    return <Comment comment={comment} key={comment.comment_id} currentUsername={currentUsername} commentsUpdated={commentsUpdated} setCommentsUpdated={setCommentsUpdated} />
+                })}</span>}
         </ul>}
 
     </>

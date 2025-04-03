@@ -43,11 +43,17 @@
   
 }
 
+.article-image{
+  width: 85%;
+}
+
 .article-body {
   text-align: left;
+  width: 100%;
 }
 
 .comment {
+  width: 100%;
   list-style: none;
   text-align: left;
   border: solid;
@@ -88,4 +94,17 @@
   background-color: rgb(186, 186, 186);
   color: rgb(48, 48, 48);
   border: solid red;
+}
+
+.spinner-border {
+  color: rgb(113, 77, 242);
+}
+
+.delete-button {
+margin-left: 80%;
+}
+
+.button-spinner {
+  color: white;
+
 }
