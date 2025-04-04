@@ -42,10 +42,20 @@ h1 {
   justify-content: center;
 }
 
-.card {
+.article-card {
   margin: 10px;
   text-align: center;
-  
+  background-color: rgb(186, 186, 186);
+  border: solid rgb(186, 186, 186);
+  min-height: 32rem;
+}
+
+.topic-card {
+  margin: 10px;
+  text-align: center;
+  background-color: rgb(186, 186, 186);
+  border: solid rgb(186, 186, 186);
+  min-height: 24rem;
 }
 
 .nav-bar {
@@ -77,12 +87,6 @@ h1 {
   width: 75%;
 }
 
-.card{
-  background-color: rgb(186, 186, 186);
-  border: solid rgb(186, 186, 186);
-  min-height: 32rem;
-  
-}
 
 .card-body{
   background-color: rgb(186, 186, 186);

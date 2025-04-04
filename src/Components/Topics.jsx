@@ -1,6 +1,7 @@
 import {Link} from 'react-router'
 import { getTopics } from '../API'
 import { useState, useEffect } from 'react'
+import TopicCard from './TopicCard'
 
 
 function Topics() {
@@ -30,10 +31,9 @@ function Topics() {
                 <h2 className="welcome-msg">Topics</h2>
             </section ><br />
             <ul
-                className="topic-list">
+                className="articles-list">
                 {topics.map((topic) => {
-                    return <li key={topic.slug} className="topic"><Link to={`/articles?topic=${topic.slug}`}>{`${topic.slug[0].toUpperCase()}${topic.slug.slice(1)}`}</ Link></li>
-                }
+                    return <TopicCard topic={topic} key={topic.slug}/>}
                 )}</ul>
         </>
     )
