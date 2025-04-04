@@ -6,7 +6,8 @@ import Articles from './Components/Articles'
 import {Route, Routes} from  "react-router"
 import HomePage from './Components/HomePage'
 import SingleArticle from './Components/SingleArticle'
-import Comments from './Components/Comment'
+import ErrorPage from './Components/ErrorPage'
+import Topics from './Components/Topics'
 
 
 function App() {
@@ -18,7 +19,9 @@ function App() {
       <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/articles" element={<Articles />} />
+      <Route path="/topics" element={<Topics />} />
       <Route path="/articles/:article_id" element={<SingleArticle />} />
+      <Route path="/*" element={<ErrorPage />} />
       </Routes>
     </>
   )

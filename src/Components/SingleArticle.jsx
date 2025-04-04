@@ -3,11 +3,13 @@ import { useState, useEffect } from "react"
 import { getArticleById, getCommentsbyArticleId, modifyArticleById } from "../API";
 import Comment from "./Comment";
 import NewCommentForm from "./NewCommentForm";
+import ErrorPage from "./ErrorPage";
 
 
 function SingleArticle() {
 
     const [isLoading, setIsLoading] = useState(true);
+    const [isError, setIsError] = useState(false)
     const [commentsLoading, setCommentsLoading] = useState(true)
     const [commentLink, setCommentLink] = useState(true)
     const [viewComments, setViewComments] = useState(false)
@@ -19,8 +21,8 @@ function SingleArticle() {
     const [commentsUpdated, setCommentsUpdated] = useState(false)
     const [commentInput, setCommentInput] = useState("")
     const { article_id } = useParams()
-
     const currentUsername = "tickle122"
+
 
     function increaseVotes() {
         modifyArticleById(article_id, 1).catch(() => {
@@ -72,6 +74,12 @@ function SingleArticle() {
                 setCommentsLoading(false)
                 setOptimisticVotes(0)
             })
+        }).catch((error)=>{
+            if(error.response.request.status === 404){
+                setIsLoading(false)
+                setIsError(true)
+            }
+            
         })
     }, [article_id, commentsUpdated]);
 
@@ -85,6 +93,11 @@ function SingleArticle() {
         )
     }
 
+    if(isError){
+
+        return <ErrorPage />
+    }
+
     return (<>
         <h2>{article.title}</h2><br />
         <img src={article.article_img_url} className="article-image" /> <br /> <br /><br />
@@ -92,9 +105,10 @@ function SingleArticle() {
         <p className="article-body">{article.body}</p>
         <br />
         <span><b>Votes: </b>{article.votes + optimisticVotes}</span><br />
+        {!voteError ? <span></span> : <span className="error-msg">Something went wrong, please try again!</span>}<br/>
         <button className="button" onClick={(increaseVotes)}>Up Vote</button>&nbsp;&nbsp;&nbsp;
         <button className="button" onClick={(decreaseVotes)}>Down Vote</button><br />
-        {!voteError ? <p></p> : <p className="error-msg">Something wen't wrong, please try again!</p>}
+       
         <br /><br />
 
         {commentLink ? <p><Link to="" onClick={showComments}>{article.comment_count} comments</Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

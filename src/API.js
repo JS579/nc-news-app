@@ -48,9 +48,9 @@ function modifyArticleById(id, num){
 
 function addComment(commentObj, id){
     return api.post(`/articles/${id}/comments`, commentObj).then((response)=>{
-        console.log(response)
+       return response
     }).catch((error)=>{
-        console.log(error);
+        return error
     })
 }
 
