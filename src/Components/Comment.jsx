@@ -2,6 +2,7 @@ import DeleteCommentButton from "./DeleteCommentButton";
 
 
 function Comment({comment, currentUsername, commentsUpdated, setCommentsUpdated}){
+
     return (
         <>
         
