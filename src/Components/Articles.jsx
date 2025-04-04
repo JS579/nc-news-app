@@ -7,16 +7,30 @@ function Articles(){
 const [articles, setArticles] = useState([]);
 const [searchParams, setSearchParams] = useSearchParams()
 const [isLoading, setIsLoading] = useState(true);
+const [sortBy, setSortBy] = useState(null)
+const [order, setOrder] = useState(null)
+const [sortLoading, setSortLoading] = useState(false)
 
 
 const topic = searchParams.get("topic")
 
+function handleSort(event){
+  setSortLoading(true)
+  setSortBy(event.target.value)
+}
+
+function handleOrder(event){
+  setSortLoading(true)
+  setOrder(event.target.value)
+}
+
 useEffect(() => {   
-    getArticles(topic).then((articles) => {
+    getArticles(topic, sortBy, order).then((articles) => {
     setArticles(articles);
         setIsLoading(false);
+        setSortLoading(false)
   })
-}, [topic]);
+}, [topic, sortBy, order]);
 
 if (isLoading) {
     return <div className="spinner-border" role="status">
@@ -26,7 +40,23 @@ if (isLoading) {
 
     return (
         <>
-        <h2 className="welcome-msg">{topic ? `${topic[0].toUpperCase()}${topic.slice(1)}` : "All Articles"}</h2>
+        <h2 className="articles-topics">{topic ? `${topic[0].toUpperCase()}${topic.slice(1)}` : "All Articles"}</h2>
+        
+        <form className="sort-buttons">
+        <span className="sort"><b>Sort by:</b></span>
+        <ul className="radio-buttons">
+          <li><label >Date posted</label>&nbsp;&nbsp;<input type="radio" name="sort-by" value="created_at" onChange={handleSort}/></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <li><label >Votes</label>&nbsp;&nbsp;<input type="radio" name="sort-by" value="votes" onChange={handleSort}/></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <li><label >Comments</label>&nbsp;&nbsp;<input type="radio" name="sort-by" value="comment_count" onChange={handleSort}/></li>
+          </ul></form>
+          <form>
+          <span className="sort"><b>Order:</b></span>
+          <ul className="radio-buttons">
+          <li><label >Ascending</label>&nbsp;&nbsp;<input type="radio" name="order-by" value="asc" onChange={handleOrder} /></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <li><label >Descending</label>&nbsp;&nbsp;<input type="radio" name="order-by" value="desc" onChange={handleOrder} /></li>
+          </ul></form>
+          {sortLoading ? <div className="spinner-border" role="status"><span className="sr-only"></span></div> : <></>}
+
         <ul className="articles-list">
           {articles.map((article) => {
             return (

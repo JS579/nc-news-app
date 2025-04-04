@@ -5,20 +5,35 @@
   text-align: center;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+body {
+  all: unset;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+h1 {
+  width: 90vw;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
 }
+
+.welcome-msg {
+  width: 90vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.articles-topics {
+  width: 90vw;
+  margin-left: auto;
+  margin-bottom: 1em;
+}
+
+.topic-list {
+  list-style: none;
+}
+
 
 .articles-list {
   display: flex;
@@ -30,12 +45,27 @@
 .card {
   margin: 10px;
   text-align: center;
+  
 }
 
 .nav-bar {
+  width: 90vw;
   list-style: none;
   display: flex;
   justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.radio-buttons {
+  width: 90vw;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0.75em;  
+  margin-bottom: 1.5em;
 }
 
 .nav-item {
@@ -44,7 +74,18 @@
 }
 
 .article-image{
-  width: 85%;
+  width: 75%;
+}
+
+.card{
+  background-color: rgb(186, 186, 186);
+  border: solid rgb(186, 186, 186);
+  min-height: 32rem;
+  
+}
+
+.card-body{
+  background-color: rgb(186, 186, 186);
 }
 
 .article-body {
@@ -59,7 +100,7 @@
   border: solid;
   margin: 0.5em;
   padding: 0.5em;
-  background-color: rgb(238, 238, 238);
+  background-color: rgb(56, 56, 56);
 }
 
 .button {
@@ -68,6 +109,7 @@
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.912);
   margin-top: 0.7em;
 }
+
 
 .error-msg {
   margin: 1em;
@@ -84,15 +126,15 @@
 .comment-input {
   width: 60%;
   height: 6em;
-  background-color: rgb(186, 186, 186);
-  color: rgb(48, 48, 48);
+  background-color: rgb(56, 56, 56);
+  color: rgb(255, 255, 255);
 }
 
 .bad-input {
   width: 60%;
   height: 6em;
-  background-color: rgb(186, 186, 186);
-  color: rgb(48, 48, 48);
+  background-color: rgb(56, 56, 56);
+  color: rgb(255, 255, 255);
   border: solid red;
 }
 
@@ -108,3 +150,9 @@ margin-left: 80%;
   color: white;
 
 }
+
+.sort-buttons {
+  margin: 0.75em;
+}
+
+
