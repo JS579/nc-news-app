@@ -114,7 +114,8 @@ h1 {
 .error-msg {
   margin: 1em;
   color: red;
-  font-size: 0.9em;
+  font-size: 1em;
+  font-weight: bold;
 }
 
 .success-msg {
