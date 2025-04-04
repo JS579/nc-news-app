@@ -106,8 +106,8 @@ function SingleArticle() {
         <br />
         <span><b>Votes: </b>{article.votes + optimisticVotes}</span><br />
         {!voteError ? <span></span> : <span className="error-msg">Something went wrong, please try again!</span>}<br/>
-        <button className="button" onClick={(increaseVotes)}>Up Vote</button>&nbsp;&nbsp;&nbsp;
-        <button className="button" onClick={(decreaseVotes)}>Down Vote</button><br />
+        <button className="button" onClick={increaseVotes}>Up Vote</button>&nbsp;&nbsp;&nbsp;
+        <button className="button" onClick={decreaseVotes}>Down Vote</button><br />
        
         <br /><br />
 
