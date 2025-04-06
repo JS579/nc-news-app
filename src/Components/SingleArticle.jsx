@@ -54,6 +54,7 @@ function SingleArticle() {
             setViewComments(false)
             setCommentLink(true)
             setViewCommentForm(false)
+            setCommentsUpdated(!commentsUpdated)
         }
     }
 
@@ -122,7 +123,7 @@ function SingleArticle() {
         {!viewComments ? <p></p> : <ul className="comment-list">
             {commentsLoading ? <div className="spinner-border" role="status">
                 <span className="sr-only"></span></div> : <span>{comments.map((comment) => {
-                    return <Comment comment={comment} key={comment.comment_id} currentUsername={currentUsername} commentsUpdated={commentsUpdated} setCommentsUpdated={setCommentsUpdated} />
+                    return <Comment comment={comment} key={comment.comment_id} currentUsername={currentUsername} commentsUpdated={commentsUpdated} setCommentsUpdated={setCommentsUpdated}/>
                 })}</span>}
         </ul>}
 

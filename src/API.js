@@ -46,6 +46,10 @@ function modifyArticleById(id, num){
     return api.patch(`/articles/${id}`, {inc_votes: num})
 }
 
+function modifyCommentById(id, num){
+    return api.patch(`/comments/${id}`, {inc_votes: num})
+}
+
 function addComment(commentObj, id){
     return api.post(`/articles/${id}/comments`, commentObj).then((response)=>{
        return response
@@ -59,4 +63,4 @@ function deleteComment(comment_id){
     return api.delete(`/comments/${comment_id}`)
 }
 
-export { getArticles, getTopics, getArticleById, getCommentsbyArticleId, modifyArticleById, addComment, deleteComment }
+export { getArticles, getTopics, getArticleById, getCommentsbyArticleId, modifyArticleById, modifyCommentById, addComment, deleteComment }

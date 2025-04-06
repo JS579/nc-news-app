@@ -147,8 +147,17 @@ h1 {
   color: rgb(113, 77, 242);
 }
 
-.delete-button {
-margin-left: 80%;
+.comment-button {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+#up-vote-comment {
+  margin-left: 0%
+}
+
+#delete-comment-button {
+  margin-left: 0%
 }
 
 .button-spinner {

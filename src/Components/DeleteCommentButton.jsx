@@ -14,7 +14,7 @@ function handleClick(){
 }
 
 
-    return <button className="button delete-button" onClick={handleClick}>{isLoading ? <div className="spinner-border button-spinner" role="status">
+    return <button id="delete-comment-button" className="button comment-button" onClick={handleClick}>{isLoading ? <div className="spinner-border button-spinner" role="status">
         <span className="sr-only"></span></div> : <span>Delete comment</span>}</button>
 }
 
